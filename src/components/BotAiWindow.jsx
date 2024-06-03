@@ -3,6 +3,7 @@ import Header from "./Header";
 import logo from "../assets/logo.png";
 import you from "../assets/you.png";
 import { FaRegThumbsUp, FaRegThumbsDown } from "react-icons/fa";
+import Rating from "react-rating";
 
 function FeedbackModal({ isOpen, onClose, onSubmit }) {
   const [feedback, setFeedback] = useState("");
@@ -46,6 +47,7 @@ function FeedbackModal({ isOpen, onClose, onSubmit }) {
 export default function BotAiWindow({ history, setHistory }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [feedbackType, setFeedbackType] = useState(null);
+  const [rating, setRating] = useState(0); // State for rating
 
   let date = new Date();
 
@@ -60,6 +62,7 @@ export default function BotAiWindow({ history, setHistory }) {
   const handleThumbsUpClick = () => {
     setFeedbackType("thumbs-up");
     setIsModalOpen(false);
+    setRating(5); // Setting rating to 5
   };
 
   const handleThumbsDownClick = () => {
@@ -73,7 +76,7 @@ export default function BotAiWindow({ history, setHistory }) {
     updatedHistory[updatedHistory.length - 1].feedback = feedback;
     setHistory(updatedHistory);
   };
-  console.log(history);
+
   return (
     <div className="">
       <div className=" ">

@@ -10,19 +10,13 @@ import './index.css';
 function App() {
   const [ques, setQues] = useState('');
   const [history, setHistory] = useState([]);
-  const [pastConversations, setPastConversations] = useState([]);
+  const [pastConversations, setPastConversations] = useState(() => {
+    const storedPastConversations = localStorage.getItem('pastConversations');
+    return storedPastConversations ? JSON.parse(storedPastConversations) : [];
+  });
   const [displayPastConversations, setDisplayPastConversations] = useState(false);
 
   useEffect(() => {
-    
-    const storedPastConversations = localStorage.getItem('pastConversations');
-    if (storedPastConversations) {
-      setPastConversations(JSON.parse(storedPastConversations));
-    }
-  }, []);
-
-  useEffect(() => {
-
     localStorage.setItem('pastConversations', JSON.stringify(pastConversations));
   }, [pastConversations]);
 
